@@ -1,0 +1,31 @@
+name: .NET Core
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.0.100
+    - name: Build with dotnet
+      run: | 
+        dotnet build ./preudhomme-api.sln --configuration Release -o ./app/build
+    
+  #build-docker-image: 
+    #runs-on: ubuntu-latest  
+    #needs:  build
+    #name: Build and push Docker container
+    #steps:
+    #- uses: actions/checkout@v1
+      
+    #- name: Build Docker container
+    #  run: docker build -f Dockerfile -t future-tracking-api . --tag gcr.io/$GKE_PROJECT/$IMAGE
+    #- name: install python-openssl
+     # run: sudo apt-get install -y python-openssl -o=Dpkg::Use-Pty=0
+      
